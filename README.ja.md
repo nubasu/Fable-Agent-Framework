@@ -182,6 +182,14 @@ cp -R "$storage/fable-incident/.claude/skills/"* "$proj/.claude/skills/"
 - **CLAUDE.md が重い気がする** → フル(lift+orchestrate+blueprint)で常駐約3.1K トークン。Sonnet 単独で走らせるプロジェクトでは Project specifics を最小限に保つ(lift README のモデル別チューニング参照)。
 - **AGENTS.md と CLAUDE.md の内容が食い違う** → Project specifics の同期漏れが典型。正は CLAUDE.md 側とし、変更時に AGENTS.md へ転記する。
 
+## コントリビュート
+
+Issue・PR 歓迎です — バグ報告、翻訳の修正、テンプレートの改善、いずれも助かります。ファミリー自身の思想に合わせたハウスルールがいくつか:
+
+- **ルールは実際に再発した失敗から足す。** テンプレへの追加提案には、それが防いだはずの失敗(「どの一文が欠けていたか」)を添えてください。思いつきの「良い習慣」は原則見送ります — 常駐ルール1つ=トークンコストのため。
+- **削る提案も足す提案と同価値。** 「このルールは発火しない」という報告も立派なコントリビュートです。
+- README は英日ペア(`README.md` / `README.ja.md`)で同期を保ち、テンプレートを変更したらファイル先頭のバージョンコメントを更新してください。
+
 ## ライセンス
 
 MIT — [LICENSE](LICENSE) を参照。

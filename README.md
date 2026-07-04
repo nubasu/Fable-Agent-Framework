@@ -182,6 +182,14 @@ cp -R "$storage/fable-incident/.claude/skills/"* "$proj/.claude/skills/"
 - **CLAUDE.md feels heavy** → the full stack (lift + orchestrate + blueprint) is ~3.1K resident tokens. For projects running Sonnet alone, keep Project specifics minimal (see per-model tuning in the lift README).
 - **AGENTS.md and CLAUDE.md disagree** → typically a missed Project specifics sync. CLAUDE.md is the source of truth; copy changes over to AGENTS.md.
 
+## Contributing
+
+Issues and PRs are welcome — bug reports, translation fixes, and template improvements alike. A few house rules, matching the family's own philosophy:
+
+- **Add rules from failures that actually recurred.** When proposing an addition to a template, include the failure it would have prevented ("which sentence was missing"). Speculative "good habits" are usually declined — every resident rule costs tokens.
+- **Deletions are as valuable as additions.** "This rule never fires" is a welcome contribution too.
+- Keep the bilingual READMEs in sync (`README.md` / `README.ja.md`), and bump the version comment at the top of any template you change.
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
