@@ -61,6 +61,9 @@ fable-harness/
 
 Windows の Claude Code はフックコマンドを **Git Bash があれば Git Bash** で実行する(無ければ PowerShell)。つまり下の bash 構成が macOS / Linux **と**大半の Windows でそのまま正解。`settings.hooks.powershell.json` は Git Bash が無い環境でだけ使う。
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-harness"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
@@ -77,8 +80,12 @@ else { Copy-Item "$storage\settings.hooks.json" "$proj\.claude\settings.json" }
 Get-Content "$storage\HARNESS.template.md" -Encoding utf8 | Add-Content "$proj\CLAUDE.md" -Encoding utf8
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-harness"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
@@ -88,6 +95,8 @@ if [ -f "$proj/.claude/settings.json" ]; then echo "settings.json あり - hooks
 else cp "$storage/settings.hooks.json" "$proj/.claude/settings.json"; fi
 cat "$storage/HARNESS.template.md" >> "$proj/CLAUDE.md"
 ```
+
+</details>
 
 その後: **セッションを再起動**し(フック登録は起動時に読み込まれる)、`/hooks` でハーネスの 4 本が一覧に出ることを確認する(`stop-verify` は `FABLE_HARNESS_VERIFY_CMD` を設定するまで何もしない)。動作確認: 適当なファイルを 1 箇所編集し、完了報告なしでターンを終えてみる — 停止が 1 回だけ弾かれてゲート実行の指示が返ってくれば正常。
 

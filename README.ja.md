@@ -40,34 +40,52 @@
 
 ## 導入手順
 
-この repo を任意の場所に clone(または ZIP 展開)し、共通変数を自分の環境に合わせて設定する(以降のスニペットで使用)。各シナリオは Windows PowerShell → macOS / Linux(bash)の順でコマンドを併記する。
+この repo を任意の場所に clone(または ZIP 展開)し、共通変数を自分の環境に合わせて設定する(以降のスニペットで使用)。各スニペットは Windows(PowerShell)と macOS / Linux(bash)を折りたたみで併記している — 自分の OS のほうを開いて使う。
 
-Windows(PowerShell):
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks"   # ← この repo を置いた場所
 $proj    = "C:\path\to\new-project"                        # ← 導入先プロジェクト
 ```
 
-macOS / Linux(bash):
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
 
 ```bash
 storage="/path/to/Fable-Agent-Framework/frameworks"   # ← この repo を置いた場所
 proj="/path/to/new-project"                           # ← 導入先プロジェクト
 ```
 
+</details>
+
 ### A. Opus 単独(最短)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Copy-Item "$storage\fable-solo\CLAUDE.template.md" "$proj\CLAUDE.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-solo/CLAUDE.template.md" "$proj/CLAUDE.md"
 ```
 
+</details>
+
 ### B. 推奨フルスタック(Opus=PL、Sonnet=実装)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 # 1) CLAUDE.md を組み立てる(ベース = lift、orchestrate を追記)
@@ -81,8 +99,12 @@ Copy-Item -Recurse -Force "$storage\fable-lift\.claude\skills\*"        "$proj\.
 Copy-Item -Recurse -Force "$storage\fable-orchestrate\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-lift/CLAUDE.template.md" "$proj/CLAUDE.md"
 cat "$storage/fable-orchestrate/ORCHESTRATE.template.md" >> "$proj/CLAUDE.md"
 
@@ -91,9 +113,14 @@ cp -R "$storage/fable-lift/.claude/skills/"*        "$proj/.claude/skills/"
 cp -R "$storage/fable-orchestrate/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 Sonnet ワーカー(Claude サブエージェント)はプロジェクトの CLAUDE.md を継承するため、lift 部分がそのままワーカーの実行規律になる(PL のブリーフ品質 × ワーカーの実行規律の掛け算)。
 
 ### C. 仕様起点の上流を足す(B に追加)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-blueprint\BLUEPRINT.template.md" -Encoding utf8 |
@@ -101,40 +128,67 @@ Get-Content "$storage\fable-blueprint\BLUEPRINT.template.md" -Encoding utf8 |
 Copy-Item -Recurse -Force "$storage\fable-blueprint\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-blueprint/BLUEPRINT.template.md" >> "$proj/CLAUDE.md"
 cp -R "$storage/fable-blueprint/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 ### D. Codex ワーカーを足す(B/C に追加)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Copy-Item "$storage\fable-orchestrate\AGENTS.template.md" "$proj\AGENTS.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-orchestrate/AGENTS.template.md" "$proj/AGENTS.md"
 ```
+
+</details>
 
 - 非対話実行の CLI 形式(`codex exec` 等)をローカルの `codex --help` で確認する。
 - AGENTS.md 末尾の Project specifics を CLAUDE.md 側と同期する(Codex にもビルド・テストコマンドが要る)。
 
 ### E. 1枚だけで軽量スタート(混成チーム)
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 Copy-Item "$storage\fable-team\AGENTS.template.md" "$proj\AGENTS.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-team/AGENTS.template.md" "$proj/AGENTS.md"
 ```
+
+</details>
 
 - Claude 側の橋渡し: プロジェクトの CLAUDE.md 冒頭付近に `@AGENTS.md` の1行を追加する(お使いの Claude Code が AGENTS.md をネイティブに読む場合は不要 — 実挙動を確認)。
 
 ### F. 継続運用モジュールを足す(全シナリオに追加可)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-retro\RETRO.template.md" -Encoding utf8 |
@@ -143,17 +197,26 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\fable-retro\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-retro/RETRO.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/fable-retro/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 - セッション跨ぎの復元(session-bootstrap)とルール育成(retro)。マルチセッションの実務では最初から入れておくことを推奨。
 - E(fable-team 1枚)構成でも、`@AGENTS.md` の橋渡し行を書いた CLAUDE.md に追記すれば併用できる。
 
 ### G. 障害対応モジュールを足す(本番を運用するプロジェクト向け、全シナリオに追加可)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-incident\INCIDENT.template.md" -Encoding utf8 |
@@ -162,16 +225,25 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\fable-incident\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-incident/INCIDENT.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/fable-incident/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 - 本番影響が出た瞬間の実況プロトコル(止血→診断の順序厳守・証拠保全・タイムライン)と、解決後の blameless ポストモーテム。診断は lift の root-cause-debug、教訓の配置は retro に接続する(未導入でも単体で動く)。
 
 ### H. 強制ハーネスを足す(hooks。全シナリオに追加可)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 New-Item -ItemType Directory -Force "$proj\.claude\hooks" | Out-Null
@@ -182,14 +254,20 @@ Get-Content "$storage\fable-harness\HARNESS.template.md" -Encoding utf8 |
   Add-Content "$proj\CLAUDE.md" -Encoding utf8
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 mkdir -p "$proj/.claude/hooks"
 cp "$storage/fable-harness/.claude/hooks/"* "$proj/.claude/hooks/"
 if [ -f "$proj/.claude/settings.json" ]; then echo "settings.json あり - hooks ブロックを手動でマージしてください"
 else cp "$storage/fable-harness/settings.hooks.json" "$proj/.claude/settings.json"; fi
 cat "$storage/fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 ```
+
+</details>
 
 - 常時稼働の 3 本がテキスト規律を機械的ガードレールに変える: finish-gate マーカーなしの「done」を弾く Stop フック、サブエージェントが戻るたびの検収ナッジ、セッション開始時の `.claude/state/` 自動注入。導入後はセッションを再起動し、`/hooks` で登録を確認する。
 - 任意の strict モード: `FABLE_HARNESS_VERIFY_CMD` を settings の `env` に設定すると、編集後の Stop 時に実チェックコマンドを実行し、失敗の間は完了をブロックする。`FABLE_HARNESS_DISABLE=stop,accept,session,verify|all` で個別フックを無効化できる。

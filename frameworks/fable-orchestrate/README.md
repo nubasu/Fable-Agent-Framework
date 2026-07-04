@@ -51,6 +51,9 @@ Design highlights:
 
 For combined installs with other frameworks (the recommended full stack, etc.), see the README.md at the repo root.
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-orchestrate"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
@@ -66,8 +69,12 @@ Get-Content "$storage\ORCHESTRATE.template.md" -Encoding utf8 | Add-Content "$pr
 Copy-Item "$storage\AGENTS.template.md" "$proj\AGENTS.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-orchestrate"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
@@ -76,6 +83,8 @@ cp -R "$storage/.claude/skills/"* "$proj/.claude/skills/"
 cat "$storage/ORCHESTRATE.template.md" >> "$proj/CLAUDE.md"
 cp "$storage/AGENTS.template.md" "$proj/AGENTS.md"   # only if using Codex
 ```
+
+</details>
 
 Afterwards, sync the Project specifics at the end of AGENTS.md with the CLAUDE.md side (external agents need the build/test commands too).
 

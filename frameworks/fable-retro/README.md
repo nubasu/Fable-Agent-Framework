@@ -48,6 +48,9 @@ Works even in setups without state files or a ledger (restore from git log and d
 
 ## Installation
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-retro"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
@@ -60,8 +63,12 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-retro"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
@@ -69,6 +76,8 @@ cat "$storage/RETRO.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/.claude/skills/"* "$proj/.claude/skills/"
 ```
+
+</details>
 
 For combined installs with other frameworks, see the README.md at the repo root.
 

@@ -61,6 +61,9 @@ After edits, the Stop hook runs the command (bash variant via `sh -c`, PowerShel
 
 On Windows, Claude Code runs hook commands under **Git Bash when available** (PowerShell otherwise) — so the default bash setup below is correct for macOS, Linux, **and** most Windows machines. Reach for `settings.hooks.powershell.json` only where Git Bash is unavailable.
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-harness"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
@@ -77,8 +80,12 @@ else { Copy-Item "$storage\settings.hooks.json" "$proj\.claude\settings.json" }
 Get-Content "$storage\HARNESS.template.md" -Encoding utf8 | Add-Content "$proj\CLAUDE.md" -Encoding utf8
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-harness"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
@@ -88,6 +95,8 @@ if [ -f "$proj/.claude/settings.json" ]; then echo "settings.json exists - merge
 else cp "$storage/settings.hooks.json" "$proj/.claude/settings.json"; fi
 cat "$storage/HARNESS.template.md" >> "$proj/CLAUDE.md"
 ```
+
+</details>
 
 Afterwards: **restart the session** (hook registration loads at startup) and run `/hooks` to confirm the four harness hooks are listed (`stop-verify` stays inert until `FABLE_HARNESS_VERIFY_CMD` is configured). Smoke test: make a trivial file edit and let the turn end without a completion report — the stop should bounce exactly once with the gate instruction.
 

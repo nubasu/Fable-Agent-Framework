@@ -40,34 +40,52 @@ Recipes for installing the fable family — a set of context frameworks for agen
 
 ## Installation
 
-Clone this repo anywhere (or unzip a download), then set the shared variables to match your environment (used by every snippet below). Each scenario shows the Windows PowerShell commands first, then the macOS / Linux (bash) equivalent.
+Clone this repo anywhere (or unzip a download), then set the shared variables to match your environment (used by every snippet below). Each snippet comes in two collapsed variants — expand the one for your OS.
 
-Windows (PowerShell):
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks"   # ← where you put this repo
 $proj    = "C:\path\to\new-project"                        # ← the target project
 ```
 
-macOS / Linux (bash):
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
 
 ```bash
 storage="/path/to/Fable-Agent-Framework/frameworks"   # ← where you put this repo
 proj="/path/to/new-project"                           # ← the target project
 ```
 
+</details>
+
 ### A. Solo Opus (shortest path)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Copy-Item "$storage\fable-solo\CLAUDE.template.md" "$proj\CLAUDE.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-solo/CLAUDE.template.md" "$proj/CLAUDE.md"
 ```
 
+</details>
+
 ### B. Recommended full stack (Opus = PL, Sonnet = implementation)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 # 1) Assemble CLAUDE.md (base = lift, append orchestrate)
@@ -81,8 +99,12 @@ Copy-Item -Recurse -Force "$storage\fable-lift\.claude\skills\*"        "$proj\.
 Copy-Item -Recurse -Force "$storage\fable-orchestrate\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-lift/CLAUDE.template.md" "$proj/CLAUDE.md"
 cat "$storage/fable-orchestrate/ORCHESTRATE.template.md" >> "$proj/CLAUDE.md"
 
@@ -91,9 +113,14 @@ cp -R "$storage/fable-lift/.claude/skills/"*        "$proj/.claude/skills/"
 cp -R "$storage/fable-orchestrate/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 Sonnet workers (Claude subagents) inherit the project's CLAUDE.md, so the lift part becomes the workers' execution discipline as-is (PL brief quality multiplied by worker execution discipline).
 
 ### C. Add spec-driven upstream work (on top of B)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-blueprint\BLUEPRINT.template.md" -Encoding utf8 |
@@ -101,40 +128,67 @@ Get-Content "$storage\fable-blueprint\BLUEPRINT.template.md" -Encoding utf8 |
 Copy-Item -Recurse -Force "$storage\fable-blueprint\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-blueprint/BLUEPRINT.template.md" >> "$proj/CLAUDE.md"
 cp -R "$storage/fable-blueprint/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 ### D. Add Codex workers (on top of B/C)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Copy-Item "$storage\fable-orchestrate\AGENTS.template.md" "$proj\AGENTS.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-orchestrate/AGENTS.template.md" "$proj/AGENTS.md"
 ```
+
+</details>
 
 - Check the non-interactive CLI form (`codex exec`, etc.) with your local `codex --help`.
 - Sync the Project specifics at the end of AGENTS.md with the CLAUDE.md side (Codex needs the build/test commands too).
 
 ### E. Lightweight single-file start (mixed team)
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 Copy-Item "$storage\fable-team\AGENTS.template.md" "$proj\AGENTS.md"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cp "$storage/fable-team/AGENTS.template.md" "$proj/AGENTS.md"
 ```
+
+</details>
 
 - Claude-side bridge: add a single `@AGENTS.md` line near the top of the project's CLAUDE.md (unnecessary if your Claude Code reads AGENTS.md natively — verify the actual behavior).
 
 ### F. Add the ongoing-operations module (compatible with every scenario)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-retro\RETRO.template.md" -Encoding utf8 |
@@ -143,17 +197,26 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\fable-retro\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-retro/RETRO.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/fable-retro/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 - Cross-session restore (session-bootstrap) and rule cultivation (retro). Recommended from day one for real multi-session work.
 - Works with scenario E (single fable-team file) too: append it to the CLAUDE.md that carries the `@AGENTS.md` bridge line.
 
 ### G. Add the incident-response module (for projects that operate production; compatible with every scenario)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 Get-Content "$storage\fable-incident\INCIDENT.template.md" -Encoding utf8 |
@@ -162,16 +225,25 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\fable-incident\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 cat "$storage/fable-incident/INCIDENT.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/fable-incident/.claude/skills/"* "$proj/.claude/skills/"
 ```
 
+</details>
+
 - A live protocol for the moment production impact appears (strict mitigate-before-diagnose ordering, evidence preservation, timeline) and a blameless postmortem after resolution. Diagnosis plugs into lift's root-cause-debug and lesson placement into retro (works standalone without them).
 
 ### H. Add the enforcement harness (hooks; compatible with every scenario)
+
+<details>
+<summary>Windows (PowerShell)</summary>
 
 ```powershell
 New-Item -ItemType Directory -Force "$proj\.claude\hooks" | Out-Null
@@ -182,14 +254,20 @@ Get-Content "$storage\fable-harness\HARNESS.template.md" -Encoding utf8 |
   Add-Content "$proj\CLAUDE.md" -Encoding utf8
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 mkdir -p "$proj/.claude/hooks"
 cp "$storage/fable-harness/.claude/hooks/"* "$proj/.claude/hooks/"
 if [ -f "$proj/.claude/settings.json" ]; then echo "settings.json exists - merge the hooks block manually"
 else cp "$storage/fable-harness/settings.hooks.json" "$proj/.claude/settings.json"; fi
 cat "$storage/fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 ```
+
+</details>
 
 - Three always-on hooks turn the family's text discipline into mechanical guardrails: a Stop hook that blocks "done" without a finish-gate marker, an acceptance nudge after every subagent return, and automatic `.claude/state/` injection at session start. Restart the session, then verify with `/hooks`.
 - Optional strict mode: set `FABLE_HARNESS_VERIFY_CMD` (e.g. in the settings `env` block) and the Stop hook also runs your real check command after edits, blocking completion while it fails. `FABLE_HARNESS_DISABLE=stop,accept,session,verify|all` silences individual hooks.

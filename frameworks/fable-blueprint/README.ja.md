@@ -53,6 +53,9 @@ fable-blueprint/
 
 他フレームワークとの組み合わせ導入(推奨フルスタック等)は、ストア直下の README.ja.md を参照。
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-blueprint"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
@@ -65,8 +68,12 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 Get-Content "$storage\BLUEPRINT.template.md" -Encoding utf8 | Add-Content "$proj\CLAUDE.md" -Encoding utf8
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-blueprint"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
@@ -74,6 +81,8 @@ mkdir -p "$proj/.claude/skills"
 cp -R "$storage/.claude/skills/"* "$proj/.claude/skills/"
 cat "$storage/BLUEPRINT.template.md" >> "$proj/CLAUDE.md"
 ```
+
+</details>
 
 GitHub Issues 等の外部トラッカーへの起票は任意(外部可視のためユーザー確認必須、ファイルが正)。
 

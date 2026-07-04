@@ -48,6 +48,9 @@ state ファイルや ledger がない構成でも動く(git log と docs から
 
 ## 導入手順
 
+<details>
+<summary>Windows (PowerShell)</summary>
+
 ```powershell
 $storage = "C:\path\to\Fable-Agent-Framework\frameworks\fable-retro"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
@@ -60,8 +63,12 @@ New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
 Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 ```
 
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
 ```bash
-# macOS / Linux
 storage="/path/to/Fable-Agent-Framework/frameworks/fable-retro"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
@@ -69,6 +76,8 @@ cat "$storage/RETRO.template.md" >> "$proj/CLAUDE.md"
 mkdir -p "$proj/.claude/skills"
 cp -R "$storage/.claude/skills/"* "$proj/.claude/skills/"
 ```
+
+</details>
 
 他フレームワークとの組み合わせ導入は、ストア直下の README.ja.md を参照。
 
