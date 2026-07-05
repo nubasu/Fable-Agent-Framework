@@ -44,7 +44,7 @@ pseudo-fable-solo/
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-solo"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-solo"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
 
 Copy-Item "$storage\CLAUDE.template.md" "$proj\CLAUDE.md"
@@ -56,7 +56,7 @@ Copy-Item "$storage\CLAUDE.template.md" "$proj\CLAUDE.md"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-solo"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-solo"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
 cp "$storage/CLAUDE.template.md" "$proj/CLAUDE.md"

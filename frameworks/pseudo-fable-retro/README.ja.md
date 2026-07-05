@@ -52,7 +52,7 @@ state ファイルや ledger がない構成でも動く(git log と docs から
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-retro"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-retro"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
 
 # 1. 常駐トリガーを CLAUDE.md 末尾に追記
@@ -69,7 +69,7 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-retro"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-retro"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
 cat "$storage/RETRO.template.md" >> "$proj/CLAUDE.md"

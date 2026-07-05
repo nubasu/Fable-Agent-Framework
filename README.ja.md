@@ -1,4 +1,4 @@
-# Pseudo-Fable-Agent-Framework — pseudo-fable フレームワーク導入ガイド
+# Pseudo-Fable-Framework — pseudo-fable フレームワーク導入ガイド
 
 [English](README.md) | 日本語
 
@@ -57,7 +57,7 @@
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks"   # ← この repo を置いた場所
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks"   # ← この repo を置いた場所
 $proj    = "C:\path\to\new-project"                        # ← 導入先プロジェクト
 ```
 
@@ -67,7 +67,7 @@ $proj    = "C:\path\to\new-project"                        # ← 導入先プロ
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks"   # ← この repo を置いた場所
+storage="/path/to/Pseudo-Fable-Framework/frameworks"   # ← この repo を置いた場所
 proj="/path/to/new-project"                           # ← 導入先プロジェクト
 ```
 

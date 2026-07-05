@@ -55,7 +55,7 @@ pseudo-fable-orchestrate/
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-orchestrate"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-orchestrate"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
 
 # 1. skills をコピー(.claude/skills/ に追加される)
@@ -75,7 +75,7 @@ Copy-Item "$storage\AGENTS.template.md" "$proj\AGENTS.md"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-orchestrate"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-orchestrate"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
 mkdir -p "$proj/.claude/skills"

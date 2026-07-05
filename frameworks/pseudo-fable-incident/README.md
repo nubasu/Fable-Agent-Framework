@@ -57,7 +57,7 @@ Works standalone without them (diagnosis falls back to the essentials inside the
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-incident"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-incident"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 # 1. Append the resident core to the end of CLAUDE.md
@@ -74,7 +74,7 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-incident"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-incident"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 cat "$storage/INCIDENT.template.md" >> "$proj/CLAUDE.md"

@@ -57,7 +57,7 @@ pseudo-fable-incident/
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-incident"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-incident"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
 
 # 1. 常駐コアを CLAUDE.md 末尾に追記
@@ -74,7 +74,7 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-incident"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-incident"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
 cat "$storage/INCIDENT.template.md" >> "$proj/CLAUDE.md"

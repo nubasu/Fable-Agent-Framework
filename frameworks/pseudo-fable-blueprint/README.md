@@ -57,7 +57,7 @@ For combined installs with other frameworks (the recommended full stack, etc.), 
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-blueprint"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-blueprint"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 # 1. Copy the skills (added under .claude/skills/)
@@ -74,7 +74,7 @@ Get-Content "$storage\BLUEPRINT.template.md" -Encoding utf8 | Add-Content "$proj
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-blueprint"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-blueprint"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 mkdir -p "$proj/.claude/skills"

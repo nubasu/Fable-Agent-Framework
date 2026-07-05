@@ -52,7 +52,7 @@ Works even in setups without state files or a ledger (restore from git log and d
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-retro"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-retro"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 # 1. Append the resident triggers to the end of CLAUDE.md
@@ -69,7 +69,7 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-retro"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-retro"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 cat "$storage/RETRO.template.md" >> "$proj/CLAUDE.md"

@@ -42,7 +42,7 @@ The header also prescribes the reading order — everyone reads §1–2 → your
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-team"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-team"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 Copy-Item "$storage\AGENTS.template.md" "$proj\AGENTS.md"
@@ -54,7 +54,7 @@ Copy-Item "$storage\AGENTS.template.md" "$proj\AGENTS.md"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-team"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-team"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 cp "$storage/AGENTS.template.md" "$proj/AGENTS.md"

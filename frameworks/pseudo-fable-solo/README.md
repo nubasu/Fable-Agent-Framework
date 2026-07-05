@@ -44,7 +44,7 @@ Skeleton of the contents: 5 non-negotiables (the family-wide constants) → How 
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-solo"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-solo"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 Copy-Item "$storage\CLAUDE.template.md" "$proj\CLAUDE.md"
@@ -56,7 +56,7 @@ Copy-Item "$storage\CLAUDE.template.md" "$proj\CLAUDE.md"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-solo"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-solo"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 cp "$storage/CLAUDE.template.md" "$proj/CLAUDE.md"

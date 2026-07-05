@@ -65,7 +65,7 @@ Windows の Claude Code はフックコマンドを **Git Bash があれば Git 
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-harness"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-harness"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\project"
 
 # 1. フックスクリプトをコピー
@@ -86,7 +86,7 @@ Get-Content "$storage\HARNESS.template.md" -Encoding utf8 | Add-Content "$proj\C
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-harness"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-harness"   # ← この repo を置いた場所に合わせる
 proj="/path/to/project"
 
 mkdir -p "$proj/.claude/hooks"

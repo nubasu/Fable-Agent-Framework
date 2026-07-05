@@ -5,7 +5,7 @@ description: Guided initial installation of the pseudo-fable framework family in
 
 # agent-framework-setup — install the family without breaking the target
 
-This skill runs in the Pseudo-Fable-Agent-Framework store and writes into a target project. `frameworks/` is the source of truth; the root README carries the same recipes for humans — this skill adds what raw snippets cannot: inspection before writing, merging instead of overwriting, and verification at the end.
+This skill runs in the Pseudo-Fable-Framework store and writes into a target project. `frameworks/` is the source of truth; the root README carries the same recipes for humans — this skill adds what raw snippets cannot: inspection before writing, merging instead of overwriting, and verification at the end.
 
 ## 0. Gather inputs (ask only for what the request didn't say)
 

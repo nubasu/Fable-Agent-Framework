@@ -1,4 +1,4 @@
-# Pseudo-Fable-Agent-Framework — pseudo-fable framework installation guide
+# Pseudo-Fable-Framework — pseudo-fable framework installation guide
 
 English | [日本語](README.ja.md)
 
@@ -57,7 +57,7 @@ Set the shared variables to match your environment (used by every snippet below)
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks"   # ← where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks"   # ← where you put this repo
 $proj    = "C:\path\to\new-project"                        # ← the target project
 ```
 
@@ -67,7 +67,7 @@ $proj    = "C:\path\to\new-project"                        # ← the target proj
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks"   # ← where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks"   # ← where you put this repo
 proj="/path/to/new-project"                           # ← the target project
 ```
 

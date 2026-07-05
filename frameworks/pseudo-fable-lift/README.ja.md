@@ -48,7 +48,7 @@ pseudo-fable-lift/
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-lift"   # ← この repo を置いた場所に合わせる
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-lift"   # ← この repo を置いた場所に合わせる
 $proj    = "C:\path\to\new-project"
 
 Copy-Item "$storage\CLAUDE.template.md" "$proj\CLAUDE.md"
@@ -62,7 +62,7 @@ Copy-Item -Recurse -Force "$storage\.claude\skills\*" "$proj\.claude\skills\"
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-lift"   # ← この repo を置いた場所に合わせる
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-lift"   # ← この repo を置いた場所に合わせる
 proj="/path/to/new-project"
 
 cp "$storage/CLAUDE.template.md" "$proj/CLAUDE.md"

@@ -65,7 +65,7 @@ On Windows, Claude Code runs hook commands under **Git Bash when available** (Po
 <summary>Windows (PowerShell)</summary>
 
 ```powershell
-$storage = "C:\path\to\Pseudo-Fable-Agent-Framework\frameworks\pseudo-fable-harness"   # ← adjust to where you put this repo
+$storage = "C:\path\to\Pseudo-Fable-Framework\frameworks\pseudo-fable-harness"   # ← adjust to where you put this repo
 $proj    = "C:\path\to\project"
 
 # 1. Copy the hook scripts
@@ -86,7 +86,7 @@ Get-Content "$storage\HARNESS.template.md" -Encoding utf8 | Add-Content "$proj\C
 <summary>macOS / Linux (bash)</summary>
 
 ```bash
-storage="/path/to/Pseudo-Fable-Agent-Framework/frameworks/pseudo-fable-harness"   # ← adjust to where you put this repo
+storage="/path/to/Pseudo-Fable-Framework/frameworks/pseudo-fable-harness"   # ← adjust to where you put this repo
 proj="/path/to/project"
 
 mkdir -p "$proj/.claude/hooks"
