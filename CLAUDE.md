@@ -28,6 +28,15 @@ Family pipeline: spec → fable-blueprint (design, plan, tickets) → fable-orch
 
 Installation for new projects (choosing a configuration, exclusivity rules, PowerShell/bash commands, common finishing steps) is covered in the README.md at the repo root.
 
+## Store-local skills (tooling, not templates)
+
+Repo-root `.claude/skills/` holds the store's own tooling — skills that run in a session opened in THIS repo and operate on an external target project:
+
+- `agent-framework-setup` — guided installer: configuration interview, exclusivity enforcement, ordered idempotent assembly (components are detected via their `<!-- fable-<name> vX.Y` header comments), then a agent-framework-doctor pass.
+- `agent-framework-doctor` — static health check of an installed configuration: signature inventory, duplicate appends, skills placement, harness wiring, version drift against the store.
+
+These are not templates — never copy them into target projects. Keep their component/skill tables in step with the frameworks they describe (adding a framework or renaming a skill means updating both SKILL.md files), and keep them free of personal paths like everything else here.
+
 ## Working notes
 
 - Not a code project: there are no build, lint, or test commands.

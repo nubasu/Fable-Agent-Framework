@@ -40,7 +40,18 @@
 
 ## 導入手順
 
-この repo を任意の場所に clone(または ZIP 展開)し、共通変数を自分の環境に合わせて設定する(以降のスニペットで使用)。各スニペットは Windows(PowerShell)と macOS / Linux(bash)を折りたたみで併記している — 自分の OS のほうを開いて使う。
+この repo を任意の場所に clone(または ZIP 展開)する。導入は2通り — ストア同梱の skill に任せるか、手動スニペットを実行するか。
+
+### skill に任せる導入
+
+本ストア自体に skills が2つ同梱されている(repo 直下の `.claude/skills/` — このリポジトリ用のツールであり、導入先へコピーするテンプレートではない)。この repo のルートで Claude Code を開き、普通の言葉で頼めばよい:
+
+- **`agent-framework-setup`** — 例:*「/path/to/new-project に agent framework を導入して」*。構成のヒアリング、排他ルールの強制、CLAUDE.md / AGENTS.md / skills / hooks の正しい順序での組み立てを行う。既存の CLAUDE.md は上書きせず Project specifics へ畳み込み、導入済みコンポーネントはスキップし(再実行しても安全)、最後に agent-framework-doctor で検証する。
+- **`agent-framework-doctor`** — 例:*「/path/to/project の agent framework 導入をチェックして」*。導入直後でも運用後でも使える静的ヘルスチェック: 排他違反、二重追記、skills の置き場所ミス、harness の配線、ストアとのバージョン乖離。手動導入やアップグレードの後にも有効。
+
+### 手動導入
+
+共通変数を自分の環境に合わせて設定する(以降のスニペットで使用)。各スニペットは Windows(PowerShell)と macOS / Linux(bash)を折りたたみで併記している — 自分の OS のほうを開いて使う。
 
 <details>
 <summary>Windows (PowerShell)</summary>
@@ -282,6 +293,7 @@ cat "$storage/fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 
 ## トラブルシュート
 
+- **どこが壊れているか分からない** → 本ストアで Claude Code を開き、`agent-framework-doctor` skill を対象プロジェクトに向けて実行する — 導入済みコンポーネントを棚卸しし、二重追記・skills の置き場所ミス・harness の配線問題を修正案つきで指摘する。
 - **skills が一覧に出ない** → 置き場所は `<プロジェクトルート>\.claude\skills\<name>\SKILL.md`。ディレクトリ名と frontmatter の `name:` の不一致、深すぎるネストを確認。
 - **CLAUDE.md が重い気がする** → フル(lift+orchestrate+blueprint)で常駐約3.1K トークン。Sonnet 単独で走らせるプロジェクトでは Project specifics を最小限に保つ(lift README のモデル別チューニング参照)。
 - **AGENTS.md と CLAUDE.md の内容が食い違う** → Project specifics の同期漏れが典型。正は CLAUDE.md 側とし、変更時に AGENTS.md へ転記する。

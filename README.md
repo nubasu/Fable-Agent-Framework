@@ -40,7 +40,18 @@ Recipes for installing the fable family — a set of context frameworks for agen
 
 ## Installation
 
-Clone this repo anywhere (or unzip a download), then set the shared variables to match your environment (used by every snippet below). Each snippet comes in two collapsed variants — expand the one for your OS.
+Clone this repo anywhere (or unzip a download). Two ways in: let the store's own skills drive the install, or run the manual snippets.
+
+### Skill-assisted install
+
+The store ships two skills of its own (repo-root `.claude/skills/` — tooling for this repo, not templates to copy out). Open Claude Code at the root of this repo and ask in plain words:
+
+- **`agent-framework-setup`** — e.g. *"set up the agent framework in /path/to/new-project"*. Interviews you for a configuration, enforces the exclusivity rules, assembles CLAUDE.md / AGENTS.md / skills / hooks in the correct order, folds an existing CLAUDE.md into Project specifics instead of overwriting it, skips components that are already installed (safe to re-run), and finishes with a agent-framework-doctor check.
+- **`agent-framework-doctor`** — e.g. *"check the agent framework install in /path/to/project"*. Static health check of any install, fresh or aged: exclusivity violations, duplicate appends, misplaced skills, harness wiring, version drift against the store. Useful after manual installs and upgrades too.
+
+### Manual install
+
+Set the shared variables to match your environment (used by every snippet below). Each snippet comes in two collapsed variants — expand the one for your OS.
 
 <details>
 <summary>Windows (PowerShell)</summary>
@@ -282,6 +293,7 @@ cat "$storage/fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 
 ## Troubleshooting
 
+- **Not sure what's broken** → open Claude Code in this store and run the `agent-framework-doctor` skill against the project — it inventories the installed components and flags duplicate appends, misplaced skills, and harness wiring issues, each with a fix.
 - **Skills don't show up in the list** → they must live at `<project-root>\.claude\skills\<name>\SKILL.md`. Check for a directory name that doesn't match the frontmatter `name:`, or nesting that's too deep.
 - **CLAUDE.md feels heavy** → the full stack (lift + orchestrate + blueprint) is ~3.1K resident tokens. For projects running Sonnet alone, keep Project specifics minimal (see per-model tuning in the lift README).
 - **AGENTS.md and CLAUDE.md disagree** → typically a missed Project specifics sync. CLAUDE.md is the source of truth; copy changes over to AGENTS.md.
