@@ -16,6 +16,7 @@ Recipes for installing the pseudo-fable family — a set of context frameworks f
 | `pseudo-fable-retro` | Ongoing operations: cross-session restore (session-bootstrap) + rule cultivation (retro) | CLAUDE.md append + 2 skills |
 | `pseudo-fable-incident` | Incident response: mitigate-first live protocol (incident-response) + blameless postmortem (postmortem) | CLAUDE.md append + 2 skills |
 | `pseudo-fable-harness` | Mechanical guardrails via hooks: finish-gate stop-block, accept-work nudge, state auto-injection, opt-in strict verify | hook scripts (.sh/.ps1) + settings hooks block + CLAUDE.md append |
+| `pseudo-fable-blender` | Full-depth Blender 3D-modeling domain pack (quality-first): spec + art direction → gated build → topology / materials / light & camera → anchored rubric + excellence loop | CLAUDE.md append + 7 skills + AGENTS.md addendum for external agents |
 
 ## Pick a configuration first
 
@@ -30,13 +31,14 @@ Recipes for installing the pseudo-fable family — a set of context frameworks f
 | + ongoing operations (session restore & rule cultivation; add to any setup) | + pseudo-fable-retro | +~0.3K |
 | + incident response (if you operate production; add to any setup) | + pseudo-fable-incident | +~0.5K |
 | + mechanical guardrails (hooks; add to any setup) | + pseudo-fable-harness | +~0.25K |
+| + Blender 3D modeling (domain pack, quality-first; add to any setup) | + pseudo-fable-blender | +~1.8K + 7 skills on demand |
 
 **Exclusivity rules (no duplicate installs):**
 
 - The CLAUDE.md base is **either solo or lift, never both**. solo needs no skills (they are already inlined), so don't combine it with the skills either.
 - Only one AGENTS.md at the repo root: **either the team version or the orchestrate minimal version** (the team version is a superset of the minimal one).
 
-**Growth path:** start with solo (or team) → move to lift + orchestrate when you start running workers → add blueprint when larger feature development begins. pseudo-fable-retro is small and compatible with every setup, so multi-session operations can include it from day one. Add pseudo-fable-incident once you operate production.
+**Growth path:** start with solo (or team) → move to lift + orchestrate when you start running workers → add blueprint when larger feature development begins. pseudo-fable-retro is small and compatible with every setup, so multi-session operations can include it from day one. Add pseudo-fable-incident once you operate production, and pseudo-fable-blender when the project does 3D work in Blender.
 
 ## Installation
 
@@ -283,6 +285,42 @@ cat "$storage/pseudo-fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 - Three always-on hooks turn the family's text discipline into mechanical guardrails: a Stop hook that blocks "done" without a finish-gate marker, an acceptance nudge after every subagent return, and automatic `.claude/state/` injection at session start. Restart the session, then verify with `/hooks`.
 - Optional strict mode: set `PSEUDO_FABLE_HARNESS_VERIFY_CMD` (e.g. in the settings `env` block) and the Stop hook also runs your real check command after edits, blocking completion while it fails. `PSEUDO_FABLE_HARNESS_DISABLE=stop,accept,session,verify|all` silences individual hooks.
 - On Windows the default (bash) settings are correct whenever Git Bash is installed; use `settings.hooks.powershell.json` otherwise. Details and honest limits: the pseudo-fable-harness README.
+
+### I. Add the Blender modeling domain pack (for projects doing 3D work in Blender; compatible with every scenario)
+
+<details>
+<summary>Windows (PowerShell)</summary>
+
+```powershell
+Get-Content "$storage\pseudo-fable-blender\BLENDER.template.md" -Encoding utf8 |
+  Add-Content "$proj\CLAUDE.md" -Encoding utf8
+New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
+Copy-Item -Recurse -Force "$storage\pseudo-fable-blender\.claude\skills\*" "$proj\.claude\skills\"
+
+# Optional — external agents (Codex etc.): append the addendum to AGENTS.md
+Get-Content "$storage\pseudo-fable-blender\AGENTS.template.md" -Encoding utf8 |
+  Add-Content "$proj\AGENTS.md" -Encoding utf8
+```
+
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
+```bash
+cat "$storage/pseudo-fable-blender/BLENDER.template.md" >> "$proj/CLAUDE.md"
+mkdir -p "$proj/.claude/skills"
+cp -R "$storage/pseudo-fable-blender/.claude/skills/"* "$proj/.claude/skills/"
+
+# Optional — external agents (Codex etc.): append the addendum to AGENTS.md
+cat "$storage/pseudo-fable-blender/AGENTS.template.md" >> "$proj/AGENTS.md"
+```
+
+</details>
+
+- Full-depth, quality-first Blender discipline for agents driving bpy scripts or a Blender MCP — 7 skills: spec + art direction (blender-spec), phase-gated build with variants and a hard silhouette gate (blender-build-loop), topology/shading (blender-topology), PBR materials (blender-materials), color management + light rigs + camera (blender-light-camera), multi-asset scenes (blender-scene), and the probe armory with an anchored six-axis rubric and the excellence loop (blender-verify). Quality tiers draft/production/hero — hero is the default. Verification plugs into lift's finish-gate where installed; works standalone too.
+- The AGENTS.md addendum **appends** to whichever AGENTS.md base is installed (team or orchestrate-minimal) — it is not a third AGENTS.md variant. In an external-agent-only Blender repo it can stand alone as the AGENTS.md body.
+- Optional hook layer (2 hooks): `stop-blender-qa` bounces stops that did Blender work but carry no `[blender-qa: pass|n/a]` marker, and `posttool-blender-probe` nudges "read the renders" after each headless run. Copy `pseudo-fable-blender/.claude/hooks/*` and merge its `settings.hooks.json` exactly like scenario H (coexists with pseudo-fable-harness); kill switch `PSEUDO_FABLE_BLENDER_DISABLE`. Details: the pack README.
 
 ## Common finishing steps (all scenarios)
 

@@ -21,6 +21,12 @@ This skill runs in the Pseudo-Fable-Framework store and writes into a target pro
 | lift + orchestrate + blueprint — plus spec-driven upstream | Codex AGENTS.md (requires orchestrate) |
 | team — single AGENTS.md, mixed team | |
 
+**Domain packs** — a third category: deep, quality-first domain discipline. Any number, on top of any base; in a dedicated single-purpose repo a pack may also run without a base (legal; doctor WARNs that the family's general discipline is absent).
+
+| Domain pack | Scope |
+|---|---|
+| blender — full-depth Blender 3D modeling (7 skills; hero-tier quality by default, token-heavy by design) | modeling via bpy scripts or a Blender MCP |
+
 ## 1. Inspect the target BEFORE writing anything
 
 Read what exists: `CLAUDE.md`, `AGENTS.md`, `.claude/skills/`, `.claude/hooks/`, `.claude/settings.json`, `.gitignore`.
@@ -38,7 +44,7 @@ Legacy: installs made before the 2026-07-05 rename carry `<!-- fable-<name>` sig
 - CLAUDE.md base: **solo XOR lift** — never both.
 - solo inlines all protocols → do not install any pseudo-fable skills alongside it.
 - One AGENTS.md at the root: **team XOR orchestrate-minimal** (team is the superset).
-- Modules (retro / incident / harness) compose with every base, including team.
+- Modules (retro / incident / harness) and domain packs (blender) compose with every base, including team. A domain pack without any base is legal only in a dedicated single-purpose repo — flag the missing general discipline.
 
 ## 3. Assemble — correct order, idempotent, encoding-safe
 
@@ -53,11 +59,12 @@ What each selection contributes:
 | team | bridge line `@AGENTS.md` near the top | — | `AGENTS.md` ← `pseudo-fable-team/AGENTS.template.md` |
 | retro | append `RETRO.template.md` | retro, session-bootstrap | — |
 | incident | append `INCIDENT.template.md` | incident-response, postmortem | — |
+| blender | append `BLENDER.template.md` | blender-spec, blender-build-loop, blender-topology, blender-materials, blender-light-camera, blender-scene, blender-verify | optional: append blender `AGENTS.template.md` to `AGENTS.md` (external agents) · optional hook layer: 2 script twins → `.claude/hooks/` + the pack's hooks block into `.claude/settings.json` |
 | harness | append `HARNESS.template.md` | — | `.claude/hooks/` (4 script twins, `.sh`+`.ps1`) + hooks block in `.claude/settings.json` |
 
 Rules:
 
-- **Append order**: base (solo/lift) → orchestrate → blueprint → retro → incident → harness. Verbatim concatenation — no headers or commentary of your own.
+- **Append order**: base (solo/lift) → orchestrate → blueprint → retro → incident → blender → harness. Verbatim concatenation — no headers or commentary of your own.
 - **Idempotency**: before appending a component, grep the target file for its `<!-- pseudo-fable-<name>` signature; if present, skip it and say so in the report. Upgrading an older installed version in place is manual work, not this skill's.
 - **Existing CLAUDE.md** (fresh install over a real project): the pseudo-fable base becomes the file; the previous content moves under its `## Project specifics` section. Keep the original as `CLAUDE.md.bak` until agent-framework-doctor passes, then delete it.
 - **Assemble markdown with Read + Write file tools**, not shell redirection — Windows PowerShell 5.1 defaults to UTF-16/BOM and mojibakes the templates.
@@ -69,6 +76,8 @@ Rules:
 
 - **harness** — `settings.json` absent → copy `settings.hooks.json` whole. Present → merge only its `"hooks"` block into the existing JSON (preserve every other key; re-parse to validate). On Windows without Git Bash use `settings.hooks.powershell.json`; with Git Bash the bash default is correct everywhere. Offer strict verify — `PSEUDO_FABLE_HARNESS_VERIFY_CMD` in the settings `env` block set to the project's real check command — only with explicit consent, since hooks execute it with shell privileges.
 - **team** — if the target has no CLAUDE.md, create one holding just the `@AGENTS.md` bridge line; the bridge is unnecessary only where Claude Code reads AGENTS.md natively (tell the user to verify).
+- **blender** — the AGENTS side is an **append**, not a file copy: add blender's `AGENTS.template.md` to the end of whichever AGENTS.md base is installed (team or orchestrate-minimal; same signature-check idempotency as CLAUDE.md appends). Offer it only when external agents are in play; if no AGENTS.md exists and the user wants one for a Blender-only external-agent repo, create it holding just the addendum plus a Project specifics section.
+- **blender hooks (optional)** — same mechanics as harness: `settings.json` absent → copy the pack's `settings.hooks.json` whole; present → merge only its `hooks` block (when harness is also installed, the Stop/PostToolUse arrays concatenate — both packs' hooks coexist). On Windows without Git Bash use the pack's `settings.hooks.powershell.json`. The two scripts execute no user commands (read-only guards), so the normal install confirmation suffices. Kill switch: `PSEUDO_FABLE_BLENDER_DISABLE=qa,probe|all`.
 - **Codex AGENTS.md / team** — after copying, sync the `Project specifics` section with CLAUDE.md's. CLAUDE.md is the source of truth.
 
 ## 5. Finish and verify

@@ -16,6 +16,7 @@
 | `pseudo-fable-retro` | 継続運用: セッション跨ぎの復元(session-bootstrap)+ルール育成(retro) | CLAUDE.md 追記 + skills 2種 |
 | `pseudo-fable-incident` | 障害対応: 止血優先の実況プロトコル(incident-response)+ blameless ポストモーテム(postmortem) | CLAUDE.md 追記 + skills 2種 |
 | `pseudo-fable-harness` | hooks による機械的ガードレール: finish-gate 停止ブロック・accept-work ナッジ・state 自動注入・任意の strict verify | フックスクリプト(.sh/.ps1)+ settings hooks ブロック + CLAUDE.md 追記 |
+| `pseudo-fable-blender` | Blender 3D モデリングのフルデプス・ドメインパック(品質最優先): スペック+アートディレクション → ゲート付きビルド → トポロジー/マテリアル/ライト&カメラ → アンカー付きルーブリック+excellence ループ | CLAUDE.md 追記 + skills 7種 + 外部エージェント用 AGENTS.md 追記版 |
 
 ## まず構成を選ぶ
 
@@ -30,13 +31,14 @@
 | + 継続運用(セッション復元・ルール育成。全構成に追加可) | + pseudo-fable-retro | +約0.3K |
 | + 障害対応(本番を運用するなら。全構成に追加可) | + pseudo-fable-incident | +約0.5K |
 | + 機械的ガードレール(hooks。全構成に追加可) | + pseudo-fable-harness | +約0.25K |
+| + Blender 3D モデリング(ドメインパック・品質最優先。全構成に追加可) | + pseudo-fable-blender | +約1.8K+skills 7種都度 |
 
 **排他ルール(重複導入しない):**
 
 - CLAUDE.md のベースは **solo か lift のどちらか一方**。solo は skills 不要(インライン済み)なので skills とも併用しない。
 - repo root の AGENTS.md は1枚だけ: **team 版か orchestrate 最小版のどちらか一方**(team 版は最小版の上位互換)。
 
-**成長パス:** solo(または team)で開始 → ワーカーを組む段階で lift+orchestrate へ移行 → 大きめの機能開発が始まったら blueprint を追加。pseudo-fable-retro は小さく全構成互換なので、マルチセッション運用なら最初から入れてよい。本番運用が始まったら pseudo-fable-incident を足す。
+**成長パス:** solo(または team)で開始 → ワーカーを組む段階で lift+orchestrate へ移行 → 大きめの機能開発が始まったら blueprint を追加。pseudo-fable-retro は小さく全構成互換なので、マルチセッション運用なら最初から入れてよい。本番運用が始まったら pseudo-fable-incident を、プロジェクトで Blender の 3D 作業をするなら pseudo-fable-blender を足す。
 
 ## 導入手順
 
@@ -283,6 +285,42 @@ cat "$storage/pseudo-fable-harness/HARNESS.template.md" >> "$proj/CLAUDE.md"
 - 常時稼働の 3 本がテキスト規律を機械的ガードレールに変える: finish-gate マーカーなしの「done」を弾く Stop フック、サブエージェントが戻るたびの検収ナッジ、セッション開始時の `.claude/state/` 自動注入。導入後はセッションを再起動し、`/hooks` で登録を確認する。
 - 任意の strict モード: `PSEUDO_FABLE_HARNESS_VERIFY_CMD` を settings の `env` に設定すると、編集後の Stop 時に実チェックコマンドを実行し、失敗の間は完了をブロックする。`PSEUDO_FABLE_HARNESS_DISABLE=stop,accept,session,verify|all` で個別フックを無効化できる。
 - Windows では Git Bash があれば既定(bash)設定のままで正しい。無い環境のみ `settings.hooks.powershell.json` を使う。詳細と正直な限界は pseudo-fable-harness の README を参照。
+
+### I. Blender モデリングのドメインパックを足す(Blender で 3D 作業をするプロジェクト向け、全シナリオに追加可)
+
+<details>
+<summary>Windows (PowerShell)</summary>
+
+```powershell
+Get-Content "$storage\pseudo-fable-blender\BLENDER.template.md" -Encoding utf8 |
+  Add-Content "$proj\CLAUDE.md" -Encoding utf8
+New-Item -ItemType Directory -Force "$proj\.claude\skills" | Out-Null
+Copy-Item -Recurse -Force "$storage\pseudo-fable-blender\.claude\skills\*" "$proj\.claude\skills\"
+
+# 任意 — 外部エージェント(Codex 等): 追記版を AGENTS.md に追記
+Get-Content "$storage\pseudo-fable-blender\AGENTS.template.md" -Encoding utf8 |
+  Add-Content "$proj\AGENTS.md" -Encoding utf8
+```
+
+</details>
+
+<details>
+<summary>macOS / Linux (bash)</summary>
+
+```bash
+cat "$storage/pseudo-fable-blender/BLENDER.template.md" >> "$proj/CLAUDE.md"
+mkdir -p "$proj/.claude/skills"
+cp -R "$storage/pseudo-fable-blender/.claude/skills/"* "$proj/.claude/skills/"
+
+# 任意 — 外部エージェント(Codex 等): 追記版を AGENTS.md に追記
+cat "$storage/pseudo-fable-blender/AGENTS.template.md" >> "$proj/AGENTS.md"
+```
+
+</details>
+
+- bpy スクリプトまたは Blender MCP を駆動するエージェントへの、フルデプス・品質最優先の Blender 規律 — skills 7種: スペック+アートディレクション(blender-spec)、バリアント探索とシルエットゲート付きのフェーズビルド(blender-build-loop)、トポロジー/シェーディング(blender-topology)、PBR マテリアル(blender-materials)、カラーマネジメント+ライトリグ+カメラ(blender-light-camera)、複数アセットのシーン(blender-scene)、プローブ武器庫+アンカー付き6軸ルーブリック+excellence ループ(blender-verify)。品質ティアは draft/production/hero で既定は hero。検証は lift の finish-gate に接続する(未導入でも単体で動く)。
+- AGENTS.md 追記版は導入済みのベース(team か orchestrate 最小版)に**追記**する — 第3の AGENTS.md 変種ではない。外部エージェントのみで回す Blender 専用リポジトリなら単体を AGENTS.md 本文にしてもよい。
+- 任意のフック層(2本): `stop-blender-qa` は Blender 作業をしたのに `[blender-qa: pass|n/a]` マーカーのない停止を弾き、`posttool-blender-probe` は headless 実行のたびに「レンダーを読め」をナッジする。`pseudo-fable-blender/.claude/hooks/*` をコピーし `settings.hooks.json` をシナリオ H と同じ要領でマージ(pseudo-fable-harness と共存可)。キルスイッチは `PSEUDO_FABLE_BLENDER_DISABLE`。詳細はパックの README。
 
 ## 共通仕上げ(全シナリオ)
 
